@@ -1,69 +1,61 @@
-import { defineConfig, globalIgnores } from "eslint/config";
+// eslint.config.js
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import next from '@next/eslint-plugin-next';
+import importPlugin from 'eslint-plugin-import';
+import tailwindcss from 'eslint-plugin-tailwindcss';
+import globals from 'globals';
 
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+});
 
-import importPlugin from "eslint-plugin-import";
-import tailwindcss from "eslint-plugin-tailwindcss";
-
-export default defineConfig([
-  // Next.js presets
-  ...nextVitals,
-  ...nextTs,
-
-  // Global ignores (override Next defaults if needed)
-  globalIgnores([
-    ".next/**",
-    "out/**",
-    "build/**",
-    "dist/**",
-    "node_modules/**",
-    "next-env.d.ts",
-  ]),
-
-  // Custom rules
+export default [
+  ...compat.extends('next/core-web-vitals'),
   {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        React: 'readonly',
+        JSX: 'readonly',
+      },
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
     plugins: {
+      '@next/next': next,
       import: importPlugin,
       tailwindcss,
     },
-
     rules: {
-      /* ---------------- Tailwind ---------------- */
-      "tailwindcss/classnames-order": "off", // handled by prettier-plugin-tailwindcss
-      "tailwindcss/no-custom-classname": "off",
-
-      /* ---------------- Imports ---------------- */
-      "import/order": [
-        "warn",
+      'tailwindcss/classnames-order': 'off',
+      'tailwindcss/no-custom-classname': 'off',
+      'import/order': [
+        'warn',
         {
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-          ],
-          "newlines-between": "always",
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          'newlines-between': 'always',
           alphabetize: {
-            order: "asc",
-            caseInsensitive: true,
+            order: 'asc',
           },
         },
       ],
-
-      /* ---------------- Next / React ---------------- */
-      "react/react-in-jsx-scope": "off",
-      "@next/next/no-img-element": "off",
+      'react/react-in-jsx-scope': 'off',
+      '@next/next/no-img-element': 'off',
     },
-
     settings: {
-      "import/resolver": {
-        typescript: {
-          project: "./tsconfig.json",
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
     },
   },
-]);
+];
