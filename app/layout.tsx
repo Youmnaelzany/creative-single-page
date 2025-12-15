@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Commissioner } from 'next/font/google';
 import './globals.css';
+import Footer from '@/components/Footer';
 import HeaderWrapper from '@/components/HeaderWrapper';
 
 // Optimize font loading with display: swap
@@ -38,6 +39,7 @@ export default function RootLayout({
       >
         <HeaderWrapper />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -40,7 +40,7 @@ const MobileMenu = () => {
               </ul>
               <Button
                 type="button"
-                className="h-[65px] w-[199px] cursor-pointer rounded-none bg-[#F94F4F] text-lg leading-8 font-extrabold tracking-normal text-white transition-colors duration-700 ease-in hover:bg-[#434356]"
+                className="h-[65px] w-[199px] cursor-pointer rounded-none bg-[#F94F4F] text-lg leading-8 font-extrabold tracking-normal text-white transition-colors duration-700 ease-in hover:bg-[#FF9393]"
               >
                 Schedule a call
               </Button>
