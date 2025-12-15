@@ -6,10 +6,8 @@ module.exports = {
   printWidth: 100,
   tabWidth: 2,
 
-  plugins: [
-    require("@ianvs/prettier-plugin-sort-imports"),
-    require("prettier-plugin-tailwindcss"),
-  ],
+  // Use strings so Prettier can load ESM-only plugins without require()
+  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
 
   importOrder: ["^react", "<THIRD_PARTY_MODULES>", "^@/", "^[./]"],
   importOrderSeparation: true,

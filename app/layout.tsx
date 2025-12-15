@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Commissioner } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const commissionerFont = Commissioner({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${commissionerFont.variable} max-w-360 mx-auto antialiased`}
       >
+        <Header />
         {children}
       </body>
     </html>
